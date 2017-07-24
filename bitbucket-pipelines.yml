@@ -1,0 +1,9 @@
+image: pitkley/platformio:latest
+
+pipelines:
+  default:
+    - step:
+        script: # Modify the commands below to build your repository.
+          - platformio upgrade
+          - platformio run
+          - scp .pioenvs/megaatmega2560/firmware.hex $SSH_USER@$SSH_HOST:$SSH_PATH/${BITBUCKET_REPO_SLUG}/firmware-${BITBUCKET_COMMIT}.bin
